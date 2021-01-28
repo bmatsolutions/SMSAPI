@@ -69,6 +69,14 @@ namespace DBL
             SmsRes Resp = new SmsRes();
             try
             {
+                if (!Sendreq.Receiver.Contains("257") && Sendreq.Message.Length >= 10 && Sendreq.Message.Length<=140)
+                {
+                    Resp.Balance = 0;
+                    Resp.message = "Invalid sender phone number or message length";
+                    Resp.Sent = false;
+                }
+
+                Sendreq.Receiver.Replace("+257", "257");
                 //clsdb db = new clsdb();
                 //  string Conn = System.Configuration.ConfigurationManager.ConnectionStrings["Connstring"].ToString();
                 Random rnd = new Random();
